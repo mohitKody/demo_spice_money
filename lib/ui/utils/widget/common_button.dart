@@ -17,38 +17,33 @@ class CommonButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
+      child: Container(
 
-            decoration: isweb!
-                ? BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    color: AppColors.primaryGreen)
-                : BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    gradient: const LinearGradient(
-                        begin: Alignment.centerLeft,
-                        end: Alignment.centerRight,
-                        colors: [
-                          AppColors.primary,
-                          AppColors.primary_light,
-                        ]),
-                  ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0,horizontal: 57),
-              child: Text(
-                title,
-                textAlign: TextAlign.center,
-                style: TextStyles.medium.copyWith(
-                  fontSize: 16.sp,
-                  color: AppColors.white,
-                ),
+        decoration: isweb!
+            ? BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                color: AppColors.primaryGreen)
+            : BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                gradient: const LinearGradient(
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                    colors: [
+                      AppColors.primary,
+                      AppColors.primary_light,
+                    ]),
               ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 16.0,horizontal: 57),
+          child: Text(
+            title,
+            textAlign: TextAlign.center,
+            style: TextStyles.medium.copyWith(
+              fontSize: 16.sp,
+              color: AppColors.white,
             ),
           ),
-        ],
+        ),
       ),
     );
   }

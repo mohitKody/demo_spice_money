@@ -1,11 +1,11 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:spice_money/ui/utils/constants/app_constants.dart';
 import 'package:spice_money/ui/utils/theme/app_assets.dart';
 import 'package:spice_money/ui/utils/theme/app_color_utils.dart';
-import 'dart:math' as math;
 
 import '../../routing/navigation_stack_item.dart';
 import '../../routing/stack.dart';
@@ -45,9 +45,7 @@ class _PracharMobileState extends ConsumerState<PracharMobile> {
   }
 
   Widget _widgetBody() {
-    return Container(
-      child: Image.asset(AppAssets.backgroundImage),
-    );
+    return Image.asset(AppAssets.backgroundImage);
   }
 
   Widget _bottomBody() {

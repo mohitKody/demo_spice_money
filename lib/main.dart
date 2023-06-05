@@ -20,10 +20,6 @@ Future<void> main() async {
 
   await configureMainDependencies(environment: Env.dev);
 
-
-  await Hive.initFlutter();
-  await Hive.openBox('userBox');
-
   /// Theme For Status Bar & Navigation Bar
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     /// The color of top status bar.
@@ -37,12 +33,10 @@ Future<void> main() async {
     statusBarIconBrightness: Brightness.dark,
 
     /// The brightness of top status bar.
-    ///
     /// Only honored in iOS.
     statusBarBrightness: Brightness.dark,
 
     /// The color of the system bottom navigation bar.
-    ///
     /// Only honored in Android versions O and greater.
     systemNavigationBarColor: AppColors.black,
 
@@ -80,10 +74,6 @@ class _MyAppState extends ConsumerState<MyApp> {
   @override
   void initState() {
     super.initState();
-    // _newLocaleDelegate = const AppTranslationsDelegate(newLocale: Locale("en"));
-    // application.onLocaleChanged = onLocaleChange;
-    // onLocaleChange(const Locale("en", ""));
-    // getSelectedLanguage(() => {});
 
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       final darkModeWatch = ref.watch(darkModeController);
@@ -97,30 +87,25 @@ class _MyAppState extends ConsumerState<MyApp> {
       /// Theme For Status Bar & Navigation Bar
       SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
         /// The color of top status bar.
-        ///
         /// Only honored in Android version M and greater.
         statusBarColor: Colors.transparent,
 
         /// The brightness of the top status bar icons.
-        ///
         /// Only honored in Android version M and greater.
         statusBarIconBrightness:
         AppColors.isDarkMode ? Brightness.light : Brightness.dark,
 
         /// The brightness of top status bar.
-        ///
         /// Only honored in iOS.
         statusBarBrightness:
         AppColors.isDarkMode ? Brightness.dark : Brightness.light,
 
         /// The color of the system bottom navigation bar.
-        ///
         /// Only honored in Android versions O and greater.
         systemNavigationBarColor:
         AppColors.isDarkMode ? AppColors.white : AppColors.black,
 
         /// The brightness of the system navigation bar icons.
-        ///
         /// Only honored in Android versions O and greater.
         /// When set to [Brightness.light], the system navigation bar icons are light.
         /// When set to [Brightness.dark], the system navigation bar icons are dark.
@@ -135,8 +120,6 @@ class _MyAppState extends ConsumerState<MyApp> {
   void dispose() {
     super.dispose();
 
-    Hive.box('userBox').compact();
-    Hive.close();
   }
 
   // This widget is the root of your application.
@@ -151,7 +134,7 @@ class _MyAppState extends ConsumerState<MyApp> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-
+    ///Navigator routers
     return ScreenUtilInit(
         designSize: const Size(375, 815),
         minTextAdapt: true,
@@ -174,15 +157,6 @@ class _MyAppState extends ConsumerState<MyApp> {
           routeInformationParser: getIt<MainRouterInformationParser>(
           param1: ref, param2: context),
           );
-          // return MaterialApp(
-          //   debugShowCheckedModeBanner: false,
-          //   title: appName,
-          //   theme: ThemeStyle.themeData(darkModeWatch.darkTheme, context),
-          //   supportedLocales: EasyLocalization.of(context)!.supportedLocales,
-          //   localizationsDelegates: context.localizationDelegates,
-          //   locale: EasyLocalization.of(context)!.locale,
-          //   home: const SplashScreen(),
-          // );
           });
   }
 }

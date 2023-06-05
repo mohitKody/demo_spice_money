@@ -56,6 +56,7 @@ class TextStyles {
       fontFamily: fontFamily
   );
   static TextStyle get bold => TextStyle(
+      decoration: TextDecoration.none,
       color: AppColors.black,
       fontSize: 14.sp,
       fontWeight: fwBold,

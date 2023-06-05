@@ -17,13 +17,32 @@ class CommonButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Container(
-
-        decoration: isweb!
-            ? BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                color: AppColors.primaryGreen)
-            : BoxDecoration(
+      child: isweb!
+          ? Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 100),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: AppColors.primaryGreen),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 16.0, horizontal: 57),
+                    child: Text(
+                      title,
+                      textAlign: TextAlign.center,
+                      style: TextStyles.medium.copyWith(
+                        fontSize: 16.sp,
+                        color: AppColors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            )
+          : Container(
+              decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
                 gradient: const LinearGradient(
                     begin: Alignment.centerLeft,
@@ -33,18 +52,19 @@ class CommonButton extends StatelessWidget {
                       AppColors.primary_light,
                     ]),
               ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16.0,horizontal: 57),
-          child: Text(
-            title,
-            textAlign: TextAlign.center,
-            style: TextStyles.medium.copyWith(
-              fontSize: 16.sp,
-              color: AppColors.white,
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 16.0, horizontal: 57),
+                child: Text(
+                  title,
+                  textAlign: TextAlign.center,
+                  style: TextStyles.medium.copyWith(
+                    fontSize: 16.sp,
+                    color: AppColors.white,
+                  ),
+                ),
+              ),
             ),
-          ),
-        ),
-      ),
     );
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:spice_money/ui/createoffer/helper/common_devider.dart';
 import 'package:spice_money/ui/createoffer/helper/common_radio.dart';
 import 'package:spice_money/ui/createoffer/helper/common_textfeild_brand.dart';
 import 'package:spice_money/ui/utils/theme/app_assets.dart';
@@ -36,7 +37,8 @@ class _CreateOfferWebState extends ConsumerState<CreateOfferWeb>
     super.initState();
     // SchedulerBinding.instance.addPostFrameCallback((timeStamp) async {
 
-    _tabController = TabController(vsync: this, length: tabNameList.length);
+    _tabController =
+        TabController(vsync: this, length: tabNameList.length,);
   }
 
   ///Dispose
@@ -54,63 +56,87 @@ class _CreateOfferWebState extends ConsumerState<CreateOfferWeb>
       onTap: () {
         hideKeyboard(context);
       },
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        backgroundColor: AppColors.white,
-        body: bodyWidget(),
-        appBar:  const CommonAppBar(
-          title: 'Create an offer',
-          titleLogo: AppAssets.webLogo,
-          backgroundColor: AppColors.white,
-          isLeadingEnable: true,
-          loadingsize: 200,
-        ),
-        bottomNavigationBar: Visibility(
-          // visible: productDetailWatch.isLoading == false,
-          child: Padding(
-            padding: EdgeInsets.only(
-                left: 20.w, right: 20.w, bottom: 20.w, top: 10.h),
-            child: CommonButton(
-              title: 'Next',
-              isweb: true,
-              onTap: () {
-                print(_tabController!.index);
-                (_tabController!.index == 0
-                    ? (ref
-                            .read(changeOfferController)
-                            .textEditingControllerBranding
-                            .text
-                            .isEmpty
-                        ? null
-                        : _tabController!.animateTo(1,
-                            duration: const Duration(milliseconds: 200),
-                            curve: Curves.easeOut))
-                    : (_tabController!.index == 1
-                        ? (ref.read(changeOfferController).selectedShop.isEmpty
-                            ? null
-                            : _tabController!.animateTo(2,
-                                duration: const Duration(milliseconds: 200),
-                                curve: Curves.easeOut))
-                        : (_tabController!.index == 2
-                            ? (ref
-                                    .read(changeOfferController)
-                                    .textEditingControllerOffer
-                                    .text
-                                    .isEmpty
-                                ? null
-                                : _tabController!.animateTo(3,
-                                    duration: const Duration(milliseconds: 200),
-                                    curve: Curves.easeOut))
-                            : (_tabController!.index == 3
-                                ? ref.read(navigationStackController).pushAndRemoveAll(
-                                    const NavigationStackItem.createoffer())
-                                : _tabController!.animateTo(0,
-                                    duration: const Duration(milliseconds: 200),
-                                    curve: Curves.easeOut)))));
-              },
+      child: Row(
+        children: [
+          Expanded(
+            flex: 4,
+            child: Scaffold(
+              resizeToAvoidBottomInset: false,
+              backgroundColor: Colors.white,
+              body: bodyWidget(),
+              appBar: const CommonAppBar(
+                title: 'Create an offer',
+                titleLogo: AppAssets.webLogo,
+                backgroundColor: AppColors.white,
+                isLeadingEnable: true,
+                loadingsize: 200,
+              ),
+              bottomNavigationBar: Visibility(
+                // visible: productDetailWatch.isLoading == false,
+                child: SizedBox(
+                  height: 75,
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                        left: 20.w, right: 20.w, bottom: 00.w, top: 00.h),
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: CommonButton(
+                        title: 'Next',
+                        isweb: true,
+                        onTap: () {
+                          print(_tabController!.index);
+                          (_tabController!.index == 0
+                              ? (ref
+                                      .read(changeOfferController)
+                                      .textEditingControllerBranding
+                                      .text
+                                      .isEmpty
+                                  ? null
+                                  : _tabController!.animateTo(1,
+                                      duration:
+                                          const Duration(milliseconds: 200),
+                                      curve: Curves.easeOut))
+                              : (_tabController!.index == 1
+                                  ? (ref
+                                          .read(changeOfferController)
+                                          .selectedShop
+                                          .isEmpty
+                                      ? null
+                                      : _tabController!.animateTo(2,
+                                          duration:
+                                              const Duration(milliseconds: 200),
+                                          curve: Curves.easeOut))
+                                  : (_tabController!.index == 2
+                                      ? (ref
+                                              .read(changeOfferController)
+                                              .textEditingControllerOffer
+                                              .text
+                                              .isEmpty
+                                          ? null
+                                          : _tabController!.animateTo(3,
+                                              duration: const Duration(
+                                                  milliseconds: 200),
+                                              curve: Curves.easeOut))
+                                      : (_tabController!.index == 3
+                                          ? ref
+                                              .read(navigationStackController)
+                                              .pushAndRemoveAll(
+                                                  const NavigationStackItem
+                                                      .createoffer())
+                                          : _tabController!.animateTo(0,
+                                              duration:
+                                                  const Duration(milliseconds: 200),
+                                              curve: Curves.easeOut)))));
+                        },
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ),
           ),
-        ),
+          Expanded(flex: 2, child: _sideWidget())
+        ],
       ),
     );
   }
@@ -136,15 +162,14 @@ class _CreateOfferWebState extends ConsumerState<CreateOfferWeb>
             onTap: (index) {
               _tabController!.index = _tabController!.previousIndex;
             },
-
             unselectedLabelColor: AppColors.black_light,
             // indicatorSize: TabBarIndicatorSize.tab,
             unselectedLabelStyle: TextStyles.medium
                 .copyWith(color: AppColors.black_light, fontSize: 16.0),
-            labelColor: AppColors.primary,
+            labelColor: AppColors.primaryOrange,
             indicator: const BoxDecoration(
               border: Border(
-                bottom: BorderSide(color: AppColors.primary, width: 2.0),
+                bottom: BorderSide(color: AppColors.primaryOrange, width: 2.0),
               ),
             ),
 
@@ -169,7 +194,7 @@ class _CreateOfferWebState extends ConsumerState<CreateOfferWeb>
         ),
         Expanded(
           child: Container(
-            color: AppColors.black_light.withOpacity(0.10),
+            // color: AppColors.black_light.withOpacity(0.10),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: TabBarView(
@@ -317,9 +342,8 @@ class _CreateOfferWebState extends ConsumerState<CreateOfferWeb>
         //   ),
         // );
       ),
-      const SizedBox(
-        height: 20,
-      ),
+
+
 
       // Container(
       //   decoration: BoxDecoration(
@@ -338,10 +362,18 @@ class _CreateOfferWebState extends ConsumerState<CreateOfferWeb>
       // ),
       createOfferController.textEditingControllerOffer.text.isEmpty
           ? const SizedBox.shrink()
-          : CommonTextfeildBrand(
-              myFocusNode: myfocusNode,
-              labeltext: "Enter Offer Name",
-              controller: createOfferController.textEditingControllerOffer),
+          : Column(
+            children: [
+              const CommonDevider(),
+              const SizedBox(
+                height: 20,
+              ),
+              CommonTextfeildBrand(
+                  myFocusNode: myfocusNode,
+                  labeltext: "Enter Offer Name",
+                  controller: createOfferController.textEditingControllerOffer),
+            ],
+          ),
     ]);
   }
 
@@ -351,124 +383,136 @@ class _CreateOfferWebState extends ConsumerState<CreateOfferWeb>
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-                padding: const EdgeInsets.only(top: 28, bottom: 32),
-                child: Text(
-                  'Choose your offer background',
-                  style: TextStyles.bold.copyWith(fontSize: 22.0),
-                ),
-              ),
-              Container(
-                height: screenHeight(context) / 2.5,
-                width: screenWidth(context),
-                // alignment: Alignment.center,
-                color: Colors.green,
-                child: ClipRRect(
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image.asset(
-                        createOfferController.selectImg ??
-                            AppAssets.backgroundImage,
-                        fit: BoxFit.cover,
-                        height: screenHeight(context),
-                        width: screenWidth(context),
+              Expanded(
+                flex: 2,
+                // height: screenHeight(context) / 8.5,
+                // width: screenWidth(context),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.only(top: 28, bottom: 32),
+                      child: Text(
+                        'Choose your offer background',
+                        style: TextStyles.bold.copyWith(fontSize: 20.0),
                       ),
-                      Container(
-                        decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                                begin: Alignment.bottomRight,
-                                colors: [
-                              Colors.black.withOpacity(.8),
-                              Colors.black.withOpacity(.1)
-                            ])),
-                      ),
-                      Positioned(
-                        bottom: 20,
-                        child: Container(
-                          // color: Colors.redAccent,
-                          width: screenWidth(context) / 1,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 31.0, vertical: 20),
-                            child: Text(
-                              createOfferController
-                                  .textEditingControllerOffer.text,
-                              textAlign: TextAlign.center,
-                              overflow: TextOverflow.visible,
-                              maxLines: 3,
-                              style: TextStyles.medium.copyWith(
-                                  fontSize: 18.0, color: AppColors.white),
-                            ),
+                    ),
+                    Container(
+                      height: 80,
+                      width: 80,
+                      decoration: BoxDecoration(
+                          border:
+                              Border.all(color: AppColors.primary, width: 1),
+                          borderRadius: BorderRadius.circular(8)),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            Icons.image,
+                            color: AppColors.primary,
                           ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          Text(
+                            'Gallery',
+                            style: TextStyles.medium.copyWith(
+                                fontSize: 14.0, color: AppColors.primary),
+                          )
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        width: screenWidth(context) / 3.5,
+                        child: GridView.builder(
+                          itemCount:
+                              createOfferController.festivalImages.length,
+                          // itemCount: 14,
+                          padding: EdgeInsets.zero,
+                          shrinkWrap: true,
+                          gridDelegate:
+                              const SliverGridDelegateWithMaxCrossAxisExtent(
+                                  mainAxisExtent: 100,
+                                  crossAxisSpacing: 10,
+                                  maxCrossAxisExtent: 100),
+                          itemBuilder: (BuildContext context, int index) {
+                            return Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 0.0),
+                              child: InkWell(
+                                onTap: () {
+                                  createOfferController.changeImage(
+                                      createOfferController
+                                          .festivalImages[index]);
+                                },
+                                child: Image.asset(
+                                  createOfferController.festivalImages[index],
+                                  height: 80,
+                                  width: 80,
+                                ),
+                              ),
+                            );
+                          },
                         ),
                       ),
-                    ],
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 20.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Container(
+                      height: screenHeight(context) / 2.2,
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Image.asset(
+                            createOfferController.selectImg ??
+                                AppAssets.backgroundImage,
+                            fit: BoxFit.cover,
+                            height: screenHeight(context),
+                            width: screenWidth(context),
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                    begin: Alignment.bottomRight,
+                                    colors: [
+                                  Colors.black.withOpacity(.8),
+                                  Colors.black.withOpacity(.1)
+                                ])),
+                          ),
+                          Positioned(
+                            bottom: 20,
+                            child: SizedBox(
+                              width: 200,
+                              child: Text(
+                                " createOfferController.textEditingControllerOffer.text",
+                                textAlign: TextAlign.center,
+                                overflow: TextOverflow.visible,
+                                maxLines: 3,
+                                style: TextStyles.medium.copyWith(
+                                    fontSize: 15.0, color: AppColors.white),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
               ),
             ],
           ),
         ),
-        Container(
-          height: screenHeight(context) / 8.5,
-          width: screenWidth(context),
-          child: Row(
-            children: [
-              Container(
-                height: 80,
-                width: 80,
-                decoration: BoxDecoration(
-                    border: Border.all(color: AppColors.black_light, width: 1),
-                    borderRadius: BorderRadius.circular(8)),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(Icons.image),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    Text(
-                      'Gallery',
-                      style: TextStyles.medium.copyWith(
-                        fontSize: 14.0,
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              const SizedBox(
-                width: 5,
-              ),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: createOfferController.festivalImages.length,
-                  scrollDirection: Axis.horizontal,
-                  shrinkWrap: true,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                      child: InkWell(
-                        onTap: () {
-                          createOfferController.changeImage(
-                              createOfferController.festivalImages[index]);
-                        },
-                        child: Image.asset(
-                          createOfferController.festivalImages[index],
-                          height: 80,
-                          width: 80,
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
-        )
       ],
     );
   }
@@ -523,6 +567,39 @@ class _CreateOfferWebState extends ConsumerState<CreateOfferWeb>
       width: double.infinity,
       child: Tab(
         text: title,
+      ),
+    );
+  }
+
+  Widget _sideWidget() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 26, vertical: 21),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding: const EdgeInsets.only(top: 28, bottom: 32),
+            child: Text(
+              'What is your shop name?',
+              style: TextStyles.bold.copyWith(fontSize: 20.0),
+            ),
+          ),
+          Container(
+            height: 200,
+            width: 350,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(width: 1, color: AppColors.black_grey)),
+            child: Image.asset(AppAssets.pracharTitle),
+          ),
+          Container(
+            padding: const EdgeInsets.only(top: 28, bottom: 32),
+            child: Text(
+              'Frequently ask questions',
+              style: TextStyles.bold.copyWith(fontSize: 20.0),
+            ),
+          ),
+        ],
       ),
     );
   }

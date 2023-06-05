@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:spice_money/ui/createoffer/helper/common_radio.dart';
 import 'package:spice_money/ui/createoffer/helper/common_textfeild_brand.dart';
 import 'package:spice_money/ui/utils/theme/app_assets.dart';
 import 'package:spice_money/ui/utils/widget/common_appbar.dart';
@@ -13,6 +11,7 @@ import '../../utils/constants/app_constants.dart';
 import '../../utils/theme/app_color_utils.dart';
 import '../../utils/theme/text_style.dart';
 import '../../utils/widget/decorated_tab_bar.dart';
+import '../helper/common_devider.dart';
 import '../helper/create_offer_list_tile.dart';
 
 class CreateOfferMobile extends ConsumerStatefulWidget {
@@ -34,7 +33,7 @@ class _CreateOfferMobileState extends ConsumerState<CreateOfferMobile>
     // SchedulerBinding.instance.addPostFrameCallback((timeStamp) async {
 
     _tabController =
-        TabController(vsync: this, length: tabNameList.length);
+        TabController(vsync: this, length: tabNameList.length, initialIndex: 2);
   }
 
   ///Dispose
@@ -166,7 +165,7 @@ class _CreateOfferMobileState extends ConsumerState<CreateOfferMobile>
         ),
         Expanded(
           child: Container(
-            color: AppColors.black_light.withOpacity(0.10),
+            // color: AppColors.black_light.withOpacity(0.10),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: TabBarView(
@@ -314,9 +313,6 @@ class _CreateOfferMobileState extends ConsumerState<CreateOfferMobile>
         //   ),
         // );
       ),
-      const SizedBox(
-        height: 20,
-      ),
 
       // Container(
       //   decoration: BoxDecoration(
@@ -335,10 +331,19 @@ class _CreateOfferMobileState extends ConsumerState<CreateOfferMobile>
       // ),
       createOfferController.textEditingControllerOffer.text.isEmpty
           ? const SizedBox.shrink()
-          : CommonTextfeildBrand(
-              myFocusNode: myfocusNode,
-              labeltext: "Enter Offer Name",
-              controller: createOfferController.textEditingControllerOffer),
+          : Column(
+              children: [
+                const CommonDevider(),
+                const SizedBox(
+                  height: 20,
+                ),
+                CommonTextfeildBrand(
+                    myFocusNode: myfocusNode,
+                    labeltext: "Enter Offer Name",
+                    controller:
+                        createOfferController.textEditingControllerOffer),
+              ],
+            ),
     ]);
   }
 
@@ -378,7 +383,6 @@ class _CreateOfferMobileState extends ConsumerState<CreateOfferMobile>
                         decoration: BoxDecoration(
                             gradient: LinearGradient(
                                 begin: Alignment.bottomRight,
-
                                 colors: [
                               Colors.black.withOpacity(.8),
                               Colors.black.withOpacity(.1)
@@ -388,9 +392,10 @@ class _CreateOfferMobileState extends ConsumerState<CreateOfferMobile>
                         bottom: 20,
                         child: Container(
                           // color: Colors.redAccent,
-                          width: screenWidth(context)/1,
+                          width: screenWidth(context) / 1,
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 31.0,vertical: 20),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 31.0, vertical: 20),
                             child: Text(
                               createOfferController
                                   .textEditingControllerOffer.text,
@@ -403,7 +408,6 @@ class _CreateOfferMobileState extends ConsumerState<CreateOfferMobile>
                           ),
                         ),
                       ),
-
                     ],
                   ),
                 ),

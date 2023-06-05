@@ -60,9 +60,8 @@ class MainRouterDelegate extends RouterDelegate<NavigationStack>
                 const MaterialPage(child: Splash(), key: ValueKey(Keys.splash)),
             prachar: () => const MaterialPage(
                 child: Prachar(), key: ValueKey(Keys.prachar)),
-createoffer: () => const MaterialPage(
+            createoffer: () => const MaterialPage(
                 child: CreatOffer(), key: ValueKey(Keys.create_offer)),
-
           ))
       .toList();
 

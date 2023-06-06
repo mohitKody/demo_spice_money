@@ -20,6 +20,9 @@ Future<void> main() async {
 
   await configureMainDependencies(environment: Env.dev);
 
+
+  await Hive.initFlutter();
+  await Hive.openBox('userBox');
   /// Theme For Status Bar & Navigation Bar
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     /// The color of top status bar.
@@ -120,6 +123,8 @@ class _MyAppState extends ConsumerState<MyApp> {
   void dispose() {
     super.dispose();
 
+    Hive.box('userBox').compact();
+    Hive.close();
   }
 
   // This widget is the root of your application.

@@ -44,6 +44,8 @@ dependencies:
   freezed_annotation:
   responsive_builder:
   flutter_staggered_grid_view:
+  camera_pkg:
+    path: /Users/macpc/Documents/mohit/camera_pkg
 
 
 dev_dependencies:

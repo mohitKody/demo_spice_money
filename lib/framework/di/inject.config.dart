@@ -17,6 +17,8 @@ import 'package:spice_money/framework/controller/create_offer/create_offer_contr
     as _i3;
 import 'package:spice_money/framework/controller/dark_mode/dark_mode_controller.dart'
     as _i4;
+import 'package:spice_money/framework/controller/prachar_page/prachar_page_controller.dart'
+    as _i11;
 import 'package:spice_money/ui/routing/delegate.dart' as _i5;
 import 'package:spice_money/ui/routing/navigation_stack_item.dart' as _i10;
 import 'package:spice_money/ui/routing/parser.dart' as _i7;
@@ -55,6 +57,7 @@ extension GetItInjectableX on _i1.GetIt {
       _,
     ) =>
         _i6.NavigationStack(items));
+    gh.factory<_i11.PracharPageController>(() => _i11.PracharPageController());
     return this;
   }
 }

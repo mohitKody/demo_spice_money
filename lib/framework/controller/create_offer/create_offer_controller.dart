@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:injectable/injectable.dart';
+import 'package:spice_money/framework/di/inject.dart';
 import 'package:spice_money/ui/utils/theme/app_assets.dart';
 
-import '../../di/inject.dart';
 
 final changeOfferController = ChangeNotifierProvider(
   (ref) => getIt<CreateOfferController>(),
 );
-
+@injectable
 class CreateOfferController extends ChangeNotifier {
 
   TextEditingController textEditingControllerBranding =  TextEditingController();

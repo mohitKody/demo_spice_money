@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 
+import 'package:camera_pkg/camera_pkg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,6 +8,7 @@ import 'package:spice_money/ui/utils/constants/app_constants.dart';
 import 'package:spice_money/ui/utils/theme/app_assets.dart';
 import 'package:spice_money/ui/utils/theme/app_color_utils.dart';
 
+import '../../../framework/controller/prachar_page/prachar_page_controller.dart';
 import '../../routing/navigation_stack_item.dart';
 import '../../routing/stack.dart';
 import '../../utils/theme/text_style.dart';
@@ -49,6 +51,8 @@ class _PracharMobileState extends ConsumerState<PracharMobile> {
   }
 
   Widget _bottomBody() {
+    final pracharWatch = ref.watch(pracharPageController);
+
     return Stack(
       children: [
         CustomPaint(
@@ -98,10 +102,20 @@ class _PracharMobileState extends ConsumerState<PracharMobile> {
                 // ignore: prefer_const_constructors
                 Positioned(
                     bottom: 0,
-                    child:  CommonButtonArrow(
-                      onTap: (){
+                    child: CommonButtonArrow(
+                      onTap: () {
                         ref.read(navigationStackController).push(
                             const NavigationStackItem.createoffer());
+
+                        // const CameraApp();
+
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) => CameraExampleHome(
+                        //               imageFile: pracharWatch.imageFile,
+                        //               videoFile: pracharWatch.videoFile,
+                        //             )));
                       },
                       title: 'Create an offer',
                     ))

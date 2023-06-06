@@ -33,7 +33,7 @@ class _CreateOfferMobileState extends ConsumerState<CreateOfferMobile>
     // SchedulerBinding.instance.addPostFrameCallback((timeStamp) async {
 
     _tabController =
-        TabController(vsync: this, length: tabNameList.length, initialIndex: 2);
+        TabController(vsync: this, length: tabNameList.length,);
   }
 
   ///Dispose
@@ -45,7 +45,7 @@ class _CreateOfferMobileState extends ConsumerState<CreateOfferMobile>
   ///Build
   @override
   Widget build(BuildContext context) {
-    final offerWatch = ref.watch(changeOfferController);
+    // final offerWatch = ref.watch(changeOfferController);
 
     return GestureDetector(
       onTap: () {
